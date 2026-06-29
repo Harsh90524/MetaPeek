@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --surface-0: #f5f4f1;
+  --surface-1: #fafaf8;
+  --surface-2: #ffffff;
+  --text-primary: #1a1a18;
+  --text-secondary: #52524e;
+  --text-muted: #8a8a84;
+  --border: rgba(0,0,0,0.08);
+  --border-strong: rgba(0,0,0,0.14);
+  --accent: #2563eb;
+  --accent-bg: #eff6ff;
+  --accent-text: #1d4ed8;
+  --radius: 8px;
+}
+
+[data-theme="dark"] {
+  --surface-0: #0f0f0e;
+  --surface-1: #1a1a18;
+  --surface-2: #222220;
+  --text-primary: #f0efe9;
+  --text-secondary: #a8a89e;
+  --text-muted: #6a6a62;
+  --border: rgba(255,255,255,0.08);
+  --border-strong: rgba(255,255,255,0.14);
+  --accent: #3b82f6;
+  --accent-bg: #1e3a5f;
+  --accent-text: #93c5fd;
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--surface-0);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-mono {
+  font-family: 'DM Mono', monospace;
+}
+
+/* Smooth tab transitions */
+.tab-pane {
+  animation: fadeIn 0.18s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Upload drag zone */
+.upload-zone {
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.upload-zone.drag-over {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+
+/* Scan progress bar */
+.scan-fill {
+  transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Spinner */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spinner {
+  animation: spin 0.75s linear infinite;
+}
+
+/* Metadata card hover */
+.meta-card {
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.meta-card:hover {
+  box-shadow: 0 0 0 2px rgba(37,99,235,0.12);
+}
