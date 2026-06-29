@@ -205,7 +205,8 @@ export default function ViewerPane({ store, setStore, onEdit }: ViewerPaneProps)
         pdf.setCreationDate(new Date(0))
         pdf.setModificationDate(new Date(0))
         const pdfBytes = await pdf.save()
-        downloadBlob(new Blob([pdfBytes], { type: 'application/pdf' }), 'clean_' + store.file.name)
+        const pdfArray = new Uint8Array(pdfBytes.buffer.slice(0) as ArrayBuffer)
+        downloadBlob(new Blob([pdfArray], { type: 'application/pdf' }), 'clean_' + store.file.name)
 
       } else if (kind === 'docx') {
         const JSZip = (await import('jszip')).default
