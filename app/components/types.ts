@@ -208,8 +208,13 @@ export function flattenMeta(obj: Record<string, unknown>, depth = 0): Record<str
 }
 
 // ── File stripping helpers ────────────────────────────────────────────────────
+function toSafeBlob(parts: Uint8Array[], type: string): Blob {
+  const safeParts = parts.map(p => p.buffer.slice(p.byteOffset, p.byteOffset + p.byteLength) as ArrayBuffer)
+  return new Blob(safeParts, { type })
+}
+
 export function stripJpegExif(bytes: Uint8Array, type: string): Blob {
-  if (bytes[0] !== 0xff || bytes[1] !== 0xd8) return new Blob([bytes], { type })
+  if (bytes[0] !== 0xff || bytes[1] !== 0xd8) return toSafeBlob([bytes], type)
   const out: Uint8Array[] = [bytes.slice(0, 2)]
   let i = 2
   while (i < bytes.length - 1) {
@@ -223,7 +228,7 @@ export function stripJpegExif(bytes: Uint8Array, type: string): Blob {
     i += 2 + segLen
   }
   if (i < bytes.length) out.push(bytes.slice(i))
-  return new Blob(out, { type })
+  return toSafeBlob(out, type)
 }
 
 export function downloadBlob(blob: Blob, name: string) {
