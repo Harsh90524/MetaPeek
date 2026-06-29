@@ -26,11 +26,12 @@ export default function TabBar({ active, onChange }: TabBarProps) {
           className="flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium transition-colors"
           style={{
             color: active === t.key ? 'var(--accent-text)' : 'var(--text-secondary)',
+            borderTop: 'none',
+            borderLeft: 'none',
+            borderRight: 'none',
             borderBottom: active === t.key ? '2px solid #2563eb' : '2px solid transparent',
             marginBottom: '-1px',
             background: 'none',
-            border: 'none',
-            borderBottom: active === t.key ? '2px solid #2563eb' : '2px solid transparent',
             cursor: 'pointer',
             fontFamily: 'inherit',
           }}
