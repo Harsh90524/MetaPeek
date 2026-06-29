@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
     // Process with sharp — strips all metadata
     const stripped = await sharp(buffer).withMetadata({}).toBuffer()
 
-    return new NextResponse(stripped, {
+    return new NextResponse(new Uint8Array(stripped), {
       status: 200,
       headers: {
         'Content-Type': mime,
